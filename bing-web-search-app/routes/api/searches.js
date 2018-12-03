@@ -74,7 +74,7 @@ async function bingWebSearch(query) {
 router.get("/", (req, res) => {
   Search.findAll({
     // where: {
-    //   userEmail: req.body.userEmail
+    //   userEmail: req.headers.email
     // }
   })
     .then(searches => { 
@@ -86,11 +86,12 @@ router.get("/", (req, res) => {
 // @desc    Create a search
 // @access  Private
 router.post("/addSearch", (req, res) => {
+
   const { errors, isValid } = validateSearch(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
+  
   Search.create({
     searchText: req.body.searchText,
     date: req.body.date,

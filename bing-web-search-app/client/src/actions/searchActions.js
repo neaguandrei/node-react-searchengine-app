@@ -28,6 +28,7 @@ export const search = (query, token) => dispatch => {
         type: GET_SEARCH,
         payload: data
       });
+      console.log(results);
       console.log(data);
       res(); // dupa ce se executa let results = getResult -> executa ce este pe .then in promiseul apelat, sau rej error
     });

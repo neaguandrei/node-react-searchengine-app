@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import SearchRow from "./SearchRow";
 import { search } from "../../actions/searchActions";
 import { addSearch } from "../../actions/mySearchesActions";
-
+import { getPreferences, setPreferences } from '../../actions/preferencesActions';
 import classnames from "classnames";
 
 class Search extends Component {
@@ -14,8 +14,9 @@ class Search extends Component {
     rows: [],
     results: {},
     optionsState: [],
-    errors: {}
-  };
+    errors: {},
+    preferences: {}
+  };    
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -35,7 +36,7 @@ class Search extends Component {
   }
 
   handleKeyPress = event => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       this.props
         .search(this.state.query, localStorage.getItem("jwtToken"))
         .then(() => this.getSearches());
@@ -71,15 +72,12 @@ class Search extends Component {
     //     errors: {}
     //   })
     // }
+    //const { email } = this.props.auth.user;
     this.props.addSearch({
       searchText: this.state.query,
       date: this.getCurrentDate(),
       userEmail: "andreineagu.c@gmail.com"
     });
-  }
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -102,7 +100,6 @@ class Search extends Component {
             name="searchText"
             onChange={this.onChange.bind(this)}
             onKeyPress={this.handleKeyPress.bind(this)}
-            onChange={this.onChange.bind(this)}
           />
           {errors.searchText && (
                     <div className="invalid-feedback">{errors.searchText}</div>
@@ -151,7 +148,7 @@ class Search extends Component {
             From
           </small>
           <select className="custom-select my-1 mr-sm-2 " id="selectTime">
-            <option selected>Choose...</option>
+            <option defaultValue>Choose...</option>
             <option value="1">24 hours ago</option>
             <option value="2">Past week</option>
             <option value="3">Past month</option>
@@ -159,7 +156,7 @@ class Search extends Component {
         </div>
         <button
           type="button"
-          class="btn btn-secondary btn-lg btn-block"
+          className="btn btn-secondary btn-lg btn-block"
           onClick={this.onSubmit.bind(this)}
         >
           Save to quick search
@@ -175,16 +172,18 @@ Search.propTypes = {
   search: PropTypes.func.isRequired,
   query: PropTypes.string,
   results: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  preferences: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   query: state.query,
   results: state.results,
+  preferences: state.preferences,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { search, addSearch }
+  { search, addSearch, getPreferences, setPreferences }
 )(Search);
