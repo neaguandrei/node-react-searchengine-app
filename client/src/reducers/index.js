@@ -3,11 +3,15 @@ import authReducer from './authReducer';
 import errorReducer from './errorReducer';
 import searchReducer from './searchReducer';
 import mySearchesReducer from './mySearchesReducer';
+import preferencesReducer from './preferencesReducer';
+import commentReducer from './commentReducer';
 
 // combinam reducerii
 export default combineReducers({
-    search: mySearchesReducer,
+    preferences: preferencesReducer,
+    searches: mySearchesReducer,
     results: searchReducer,
     auth: authReducer,
-    errors: errorReducer
+    errors: errorReducer,
+    comments: commentReducer
 });

@@ -3,20 +3,45 @@ import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { getSearches, deleteSearch } from "../../actions/mySearchesActions";
+import { getComment } from "../../actions/commentActions";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
+
+import { enableQuickSearch } from "../../actions/mySearchesActions";
 
 class MySearches extends Component {
+ 
   componentDidMount() {
-    this.props.getSearches();
+    const userWithHeaders = {
+      headers: {
+        email: this.props.auth.user.email
+      }
+    }
+    this.props.getSearches(userWithHeaders);
   }
 
   onDeleteClick = idSearch => {
     this.props.deleteSearch(idSearch);
   };
 
+  viewComments = idSearch => {
+    const commentHeaders = {
+      headers: {
+        idSearch: idSearch
+      }
+    }
+    console.log('searching id: ' + idSearch);
+    this.props.getComment(commentHeaders);
+  }
+
+  quickSearch = idSearch => {
+    this.props.enableQuickSearch(idSearch);
+  }
+
   render() {
-    const { searches } = this.props.search;
+    const { searches } = this.props.searches;
     return (
+      
       <Container>
         <ListGroup>
           <TransitionGroup className="searches-list">
@@ -32,15 +57,24 @@ class MySearches extends Component {
                     &times;
                   </Button>
                   {searchText} <br />
-                  <Button color="info" style={{ marginTop: 10 }}>
-                    View comments
-                  </Button>
+                  <Link to="/comment">
+                  <Button
+                   color="info"
+                   style={{ marginTop: 10 }}
+                   onClick={this.viewComments.bind(this, idSearch)}
+                   >
+                   View comment
+                   </Button>
+                  </Link>
+                  <Link to="/main">
                   <Button
                     color="success"
                     style={{ marginLeft: 775, marginTop: 10 }}
+                    onClick={this.quickSearch.bind(this, idSearch)}
                   >
                     Quick search
                   </Button>
+                  </Link>
                 </ListGroupItem>
               </CSSTransition>
             ))}
@@ -53,14 +87,19 @@ class MySearches extends Component {
 
 MySearches.propTypes = {
   getSearches: PropTypes.func.isRequired,
-  search: PropTypes.object.isRequired
+  searches: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  getComment: PropTypes.func.isRequired,
+  enableQuickSearch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  search: state.search
+  searches: state.searches,
+  auth: state.auth,
+  currentComment: state.currentComment
 });
 
 export default connect(
   mapStateToProps,
-  { getSearches, deleteSearch }
+  { getSearches, deleteSearch, getComment, enableQuickSearch}
 )(MySearches);

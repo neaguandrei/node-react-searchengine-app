@@ -73,9 +73,9 @@ async function bingWebSearch(query) {
 // @access  Private
 router.get("/", (req, res) => {
   Search.findAll({
-    // where: {
-    //   userEmail: req.headers.email
-    // }
+    where: {
+      userEmail: req.headers.email
+    }
   })
     .then(searches => { 
         res.json(searches);

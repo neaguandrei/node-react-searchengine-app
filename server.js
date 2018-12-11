@@ -33,7 +33,7 @@ require('./config/passport')(passport);
 // Using routes
 app.use('/api/users', users);
 app.use('/api/searches', searches);
-app.use('/api/comments', comments);
+app.use('/api/comment', comments);
 app.use('/api/preferences', preferences);
 
 // Importing database models

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux"; // ca sa ne conectam la React
 import classnames from "classnames"; // pt validare
 import { loginUser } from "../../actions/authActions";
+import { getPreferences } from "../../actions/preferencesActions";
 class Login extends Component {
   state = {
     email: "",
@@ -38,6 +39,15 @@ class Login extends Component {
       password: this.state.password
     };
     this.props.loginUser(userData);
+    
+
+    //construiesc obiectul pt a prelua din .headers cand iau pe backend
+    const userHeadersPreferences = {
+      headers: {
+        email: this.state.email
+      }
+    }
+    this.props.getPreferences(userHeadersPreferences);
   }
   render() {
     const { errors } = this.state;
@@ -94,7 +104,8 @@ class Login extends Component {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired, 
+  getPreferences: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -104,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, getPreferences }
 )(Login);

@@ -20,6 +20,7 @@ import Login from './components/authentication/Login';
 
 import Search from './components/bing/Search';
 import MySearches from './components/bing/MySearches';
+import Comment from './components/bing/Comment';
 
 // Verificam daca exista jwtToken in localStorage pentru a pastra userul logat si in cazul refreshului
 if (localStorage.jwtToken) {
@@ -56,6 +57,9 @@ class App extends Component {
             </Switch>
             <Switch>
               <PrivateRoute exact path="/searches" component= {MySearches}/> 
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/comment" component= {Comment}/> 
             </Switch>
           </div>  
           <Footer/> 

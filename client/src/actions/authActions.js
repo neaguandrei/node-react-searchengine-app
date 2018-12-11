@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import jwtDecode from 'jwt-decode'; //ca sa extragem userul din stringul 'bearer token123123'
+import { getPreferences } from '../actions/preferencesActions';
 
 // Register user
 export const registerUser = (userData, history) => dispatch => { //dispatch catre reducer
@@ -57,4 +58,5 @@ export const logoutUser = () => dispatch => {
     setAuthToken(false);
     // Userul curent va deveni empty object {} ce va modifica isAuthenticated in false
     dispatch(setCurrentUser({})); //o sa ducem stateul in initialState cu empty obj dupa ce actiunea trece prin reducer
+    dispatch(getPreferences({})); //facem si preferences null cand dam logout
 }

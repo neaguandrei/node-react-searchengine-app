@@ -5,19 +5,20 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: false
         },
-        date: {
-          type: DataTypes.DATE,
-          allowNull: false
+        idSearch: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          foreignKey: true
         }
       })
   
-      comment.associate = models => {
-        models.comment.belongsTo(models.user, {
-          onDelete: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      };
+      // comment.associate = models => {
+      //   models.comment.belongsTo(models.user, {
+      //     onDelete: "CASCADE",
+      //     foreignKey: {
+      //       allowNull: false
+      //     }
+      //   });
+      // };
         return comment;
   };

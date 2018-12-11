@@ -33,30 +33,7 @@ db.search = sequelize.import('../models/Search.js');
 db.preference = sequelize.import('../models/Preference.js');
 db.comment = sequelize.import('../models/Comment.js');
 
-// const user =  sequelize.import('../models/User.js');
-// const search =  sequelize.import('../models/Search.js');
-// const preference =  sequelize.import('../models/Preference.js');
-// const comment =  sequelize.import('../models/Comment.js');
-// db[user.name] = user;
-// db[search.name] = search;
-// db[preference.name] = preference;
-// db[comment.name] = comment;
-
-// Giving search a foreign key to each model ???
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
-// Object.keys(db).forEach(function(modelName) {
-//   if ("associate" in db[modelName]) {
-//     db[modelName].associate(db);
-//   }
-// });
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-//db.sequelize.sync();
 
 module.exports = db;

@@ -4,7 +4,7 @@ import {
   SEARCH_LOADING
 } from "./types";
 
-let getResults = function(query, token) {
+let getResults = function (query, token) {
   return new Promise((re, rj) => {
     axios
       .get("/api/searches/search", {
@@ -21,7 +21,9 @@ let getResults = function(query, token) {
 
 export const search = (query, token) => dispatch => {
   //dispatch catre reducer
-  dispatch({ type: SEARCH_LOADING });
+  dispatch({
+    type: SEARCH_LOADING
+  });
   return new Promise((res, rej) => {
     let results = getResults(query, token).then(data => {
       dispatch({

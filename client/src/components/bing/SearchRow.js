@@ -13,7 +13,7 @@ class SearchRow extends Component {
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{this.props.search.name}</h5>
           </div>
-          <p className="mb-1">{this.props.search.snippet}</p>
+          <p className="mb-1" >{this.props.search.snippet}</p>
         </a>
       </div>
     );

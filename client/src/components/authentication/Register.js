@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-
+import { createPreferences } from "../../actions/preferencesActions";
 // REQUEST trebuie trimis din REDUX ACTION
 // RESPONSE este trimis prin REDUX REDUCER pentru a ajunge la COMPONENTA
 
@@ -47,6 +47,10 @@ class Register extends Component {
     // axios.post('/api/users/register', newUser)
     //     .then(res => console.log(res.data)) //in /api/users/register primim in json res.data userul
     //     .catch(err => this.setState({errors: err.response.data})); // punem in stateul errors obiectul gresit
+
+    this.props.createPreferences({
+      userEmail: this.state.email
+    });
   }
 
   //noValidate -> scoate validarea de la html5
@@ -155,7 +159,8 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  createPreferences: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   //pentru a pune stateul in proprietati si sa accesam dupa cu this.props.auth
@@ -165,5 +170,5 @@ const mapStateToProps = state => ({
 // export default Register; + //withRouter pt redirectare (44 + 140 )
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, createPreferences }
 )(withRouter(Register));

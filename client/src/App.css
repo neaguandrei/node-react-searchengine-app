@@ -8,7 +8,7 @@ img {
 
 .landing {
   position: relative;
-  background: url("../src/components/img/showcase.jpg") no-repeat;
+  background: url("../src/components/img/landingPhoto.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
