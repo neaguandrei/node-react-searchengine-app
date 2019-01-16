@@ -33,7 +33,7 @@ router.get("/search", (req, res) => {
 
 //async + promise ca sa astepte pana cand primeste un raspuns de la query sa nu returneze blank
 async function bingWebSearch(query) {
-  const SUBSCRIPTION_KEY = "bccdbec011754ea0b33e296bf61aa9d5";
+  const SUBSCRIPTION_KEY = "a3353f15317247dc9b3f56cca113389a";
   if (!SUBSCRIPTION_KEY) {
     throw new Error("AZURE_SUBSCRIPTION_KEY is not set.");
   }
@@ -67,7 +67,6 @@ async function bingWebSearch(query) {
   });
 }
 
-// trebuie rezolvat whereul ca sa pot sa extrag pt user specific
 // @route   GET api/searches
 // @desc    Get all searches
 // @access  Private

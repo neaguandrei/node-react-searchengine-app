@@ -14,6 +14,13 @@ const initialState = {
   loading: false
 };
 
+// {...state, searches: action.payload}
+// return Object.assign({}, state, {all: action.payload.data});
+// It means that the resulting object:
+
+// is not the original object
+// it contains all properties from state
+// it contains a new value for property all.
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_SEARCHES:
