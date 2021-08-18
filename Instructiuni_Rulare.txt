@@ -1,3 +1,0 @@
-1. MySQL pe XAMPP - Apache + MySQL trebuie pornite.
-2. In browser -> http://localhost/phpmyadmin/ -> trebuie sa am baza de date denumita 'project-tw'
-3. Din terminal -> cd main-project -> npm run dev ( am creat scriptul care ruleaza cu concurrently si clientul si serverul simultan fara sa mai existe nevoia de 2 terminale
